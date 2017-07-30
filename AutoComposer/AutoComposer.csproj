@@ -8,4 +8,8 @@
     <Authors>Michael Johnson</Authors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+  </ItemGroup>
+
 </Project>
