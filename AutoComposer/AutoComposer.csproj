@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <Description>Automatically composes multiple objects into a single object</Description>
     <Authors>Michael Johnson</Authors>
     <Company>ociaw.com</Company>
-    <PackageReleaseNotes>Increased performance 20x by caching properties</PackageReleaseNotes>
+    <PackageReleaseNotes>We now require ordering for multiple composable properties
+Added a flatteng method to get all composables in a type</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
