@@ -9,6 +9,7 @@ namespace AutoComposer
     public class Composer
     {
         private readonly ConcurrentDictionary<Type, PropertyInfo[]> _typePropertyMaps = new ConcurrentDictionary<Type, PropertyInfo[]>();
+        private readonly ConcurrentDictionary<Type, Type[]> _typeTypeMaps = new ConcurrentDictionary<Type, Type[]>();
 
         public T Compose<T> (Object[] objects) where T : class
         {
@@ -88,14 +89,20 @@ namespace AutoComposer
             return FlattenComposableTypeInternal(type).ToArray();
         }
 
-        private List<Type> FlattenComposableTypeInternal(Type type)
+        private Type[] FlattenComposableTypeInternal(Type type)
         {
+            if (_typeTypeMaps.TryGetValue(type, out Type[] types))
+                return types;
+
             var properties = GetComposableProperties(type);
-            List<Type> types = new List<Type> { type };
+            List<Type> list = new List<Type> { type };
             foreach (var property in properties)
             {
-                types.AddRange(FlattenComposableTypeInternal(property.PropertyType));
+                list.AddRange(FlattenComposableTypeInternal(property.PropertyType));
             }
+            types = list.ToArray();
+            _typeTypeMaps.TryAdd(type, types);
+
             return types;
         }
     }

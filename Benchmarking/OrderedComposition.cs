@@ -27,8 +27,7 @@ namespace Benchmarking
         [Benchmark]
         public Type[] Flatten()
         {
-            Composer composer = new Composer();
-            Type[] types = composer.FlattenComposableType<Top>();
+            Type[] types = _composer.FlattenComposableType<Top>();
             return types;
         }
 
