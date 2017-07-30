@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoComposer", "AutoCompose
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoComposer.Tests", "AutoComposer.Tests\AutoComposer.Tests.csproj", "{F9AA074E-CECB-48BF-A631-322664977973}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarking", "Benchmarking\Benchmarking.csproj", "{4375F75C-DA6B-4524-A63E-8C5CEDFFC586}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F9AA074E-CECB-48BF-A631-322664977973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9AA074E-CECB-48BF-A631-322664977973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9AA074E-CECB-48BF-A631-322664977973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4375F75C-DA6B-4524-A63E-8C5CEDFFC586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4375F75C-DA6B-4524-A63E-8C5CEDFFC586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4375F75C-DA6B-4524-A63E-8C5CEDFFC586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4375F75C-DA6B-4524-A63E-8C5CEDFFC586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
