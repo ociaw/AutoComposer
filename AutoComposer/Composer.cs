@@ -16,7 +16,7 @@ namespace AutoComposer
                 throw new ArgumentNullException(nameof(objects));
 
             var enumerator = ((IEnumerable<Object>) objects).GetEnumerator();
-            T ret = (T) Compose(enumerator);
+            T ret = (T) ComposeInternal(enumerator);
             enumerator.Dispose();
             return ret;
         }
@@ -26,10 +26,20 @@ namespace AutoComposer
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
 
-            return (T) Compose(objects);
+            return (T) ComposeInternal(objects);
         }
 
-        private Object Compose(IEnumerator<Object> objects)
+        public Object Compose(Type type, IEnumerator<Object> objects)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (objects == null)
+                throw new ArgumentNullException(nameof(objects));
+
+            return ComposeInternal(objects);
+        }
+
+        private Object ComposeInternal(IEnumerator<Object> objects)
         {
             if (!objects.MoveNext())
                 return null;
@@ -42,7 +52,7 @@ namespace AutoComposer
             Int32 offset = 0;
             while (offset < properties.Length)
             {
-                Object obj = Compose(objects);
+                Object obj = ComposeInternal(objects);
                 if (obj == null)
                     throw new ArgumentException($"No object to compose for type {topType}");
 
@@ -63,6 +73,30 @@ namespace AutoComposer
             properties = assignableProperties.ToArray();
             _typePropertyMaps.TryAdd(type, properties);
             return properties;
+        }
+
+        public Type[] FlattenComposableType<T>()
+        {
+            return FlattenComposableTypeInternal(typeof(T)).ToArray();
+        }
+
+        public Type[] FlattenComposableType(Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            return FlattenComposableTypeInternal(type).ToArray();
+        }
+
+        private List<Type> FlattenComposableTypeInternal(Type type)
+        {
+            var properties = GetComposableProperties(type);
+            List<Type> types = new List<Type> { type };
+            foreach (var property in properties)
+            {
+                types.AddRange(FlattenComposableTypeInternal(property.PropertyType));
+            }
+            return types;
         }
     }
 }

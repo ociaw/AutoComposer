@@ -25,9 +25,11 @@ namespace Benchmarking
         }
         
         [Benchmark]
-        public (Top, Top) DoubleNestTwice()
+        public Type[] Flatten()
         {
-            return (DoubleNest(), DoubleNest());
+            Composer composer = new Composer();
+            Type[] types = composer.FlattenComposableType<Top>();
+            return types;
         }
 
         public class Top
