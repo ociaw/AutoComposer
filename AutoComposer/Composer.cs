@@ -14,11 +14,6 @@ namespace AutoComposer
         {
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
-            if (objects.Length == 0)
-                throw new ArgumentException("Must have at least one object.", nameof(objects));
-            
-            if (!(objects[0] is T))
-                throw new ArgumentException("First object must be of type T", nameof(objects));
 
             var enumerator = ((IEnumerable<Object>) objects).GetEnumerator();
             T ret = (T) Compose(enumerator);
