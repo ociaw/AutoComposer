@@ -9,7 +9,6 @@ namespace AutoComposer
     public class Composer
     {
         private readonly ConcurrentDictionary<Type, PropertyInfo[]> _typePropertyMaps = new ConcurrentDictionary<Type, PropertyInfo[]>();
-        private readonly ConcurrentDictionary<(Type, Int32), PropertyInfo> _propertyOffsets = new ConcurrentDictionary<(Type, Int32), PropertyInfo>();
 
         public T Compose<T> (Object[] objects) where T : class
         {
@@ -39,24 +38,15 @@ namespace AutoComposer
                 return null;
             Type topType = top.GetType();
             
-            List<PropertyInfo> unassignedProperties = GetComposableProperties(topType).ToList();
+            PropertyInfo[] properties = GetComposableProperties(topType);
             Int32 offset = 0;
-            while (unassignedProperties.Any())
+            while (offset < properties.Length)
             {
                 Object obj = Compose(objects);
                 if (obj == null)
                     throw new ArgumentException($"No object to compose for type {topType}");
-                if (!_propertyOffsets.TryGetValue((topType, offset), out PropertyInfo property))
-                {
-                    Type type = obj.GetType();
-                    property = unassignedProperties.FirstOrDefault(p => p.PropertyType == type);
-                    if (property == null)
-                        throw new ArgumentException($"Type {topType} has no property of type {type}.");
-                    _propertyOffsets.TryAdd((topType, offset), property);
-                }
 
-                unassignedProperties.Remove(property);
-                property.SetValue(top, obj);
+                properties[offset].SetValue(top, obj);
                 offset++;
             }
             return top;
