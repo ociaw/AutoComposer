@@ -6,21 +6,21 @@ namespace Benchmarking
 {
     public class OrderedComposition
     {
+        private readonly Composer _composer = new Composer();
+
         [Benchmark]
         public Middle SingleNest()
         {
-            Composer composer = new Composer();
             Object[] objects = { new Middle(), new Bottom(), new Bottom() };
-            Middle middle = composer.Compose<Middle>(objects);
+            Middle middle = _composer.Compose<Middle>(objects);
             return middle;
         }
 
         [Benchmark]
         public Top DoubleNest()
         {
-            Composer composer = new Composer();
             Object[] objects = { new Top(), new Middle(), new Bottom(), new Bottom(), new Middle(), new Bottom(), new Bottom() };
-            Top top = composer.Compose<Top>(objects);
+            Top top = _composer.Compose<Top>(objects);
             return top;
         }
         
