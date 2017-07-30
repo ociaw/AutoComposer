@@ -32,23 +32,19 @@ namespace Benchmarking
 
         public class Top
         {
-            [Composable]
-            [AssignOrder(2)]
+            [Composable(2)]
             public Middle Middle2 { get; set; }
 
-            [Composable]
-            [AssignOrder(1)]
+            [Composable(1)]
             public Middle Middle { get; set; }
         }
 
         public class Middle
         {
-            [Composable]
-            [AssignOrder(2)]
+            [Composable(2)]
             public Bottom Bottom2 { get; set; }
 
-            [Composable]
-            [AssignOrder(1)]
+            [Composable(1)]
             public Bottom Bottom { get; set; }
         }
 

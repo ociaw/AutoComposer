@@ -69,7 +69,7 @@ namespace AutoComposer
 
             var assignableProperties = type.GetRuntimeProperties()
                 .Where(p => p.GetCustomAttribute<ComposableAttribute>() != null)
-                .OrderBy(p => p.GetCustomAttribute<AssignOrderAttribute>()?.Order ?? 0);
+                .OrderBy(p => p.GetCustomAttribute<ComposableAttribute>().Order);
             properties = assignableProperties.ToArray();
             _typePropertyMaps.TryAdd(type, properties);
             return properties;
