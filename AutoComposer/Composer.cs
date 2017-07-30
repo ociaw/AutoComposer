@@ -20,7 +20,18 @@ namespace AutoComposer
             if (!(objects[0] is T))
                 throw new ArgumentException("First object must be of type T", nameof(objects));
 
-            return (T)Compose(((IEnumerable<Object>)objects).GetEnumerator());
+            var enumerator = ((IEnumerable<Object>) objects).GetEnumerator();
+            T ret = (T) Compose(enumerator);
+            enumerator.Dispose();
+            return ret;
+        }
+
+        public T Compose<T>(IEnumerator<Object> objects) where T : class
+        {
+            if (objects == null)
+                throw new ArgumentNullException(nameof(objects));
+
+            return (T) Compose(objects);
         }
 
         private Object Compose(IEnumerator<Object> objects)
