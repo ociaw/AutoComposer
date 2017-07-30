@@ -37,11 +37,8 @@ namespace AutoComposer
             if (top == null)
                 return null;
             Type topType = top.GetType();
-
-            var assignableProperties = topType.GetRuntimeProperties()
-                .Where(p => p.GetCustomAttribute<ComposableAttribute>() != null)
-                .OrderBy(p => p.GetCustomAttribute<AssignOrderAttribute>()?.Order ?? 0);
-            List<PropertyInfo> unassignedProperties = assignableProperties.ToList();
+            
+            List<PropertyInfo> unassignedProperties = GetComposableProperties(topType).ToList();
 
             while (unassignedProperties.Any())
             {
@@ -57,6 +54,19 @@ namespace AutoComposer
                 property.SetValue(top, obj);
             }
             return top;
+        }
+
+        private PropertyInfo[] GetComposableProperties(Type type)
+        {
+            if (_typePropertyMaps.TryGetValue(type, out PropertyInfo[] properties))
+                return properties;
+
+            var assignableProperties = type.GetRuntimeProperties()
+                .Where(p => p.GetCustomAttribute<ComposableAttribute>() != null)
+                .OrderBy(p => p.GetCustomAttribute<AssignOrderAttribute>()?.Order ?? 0);
+            properties = assignableProperties.ToArray();
+            _typePropertyMaps.TryAdd(type, properties);
+            return properties;
         }
 
         private Object Compose(Type t, Object[] objects)
