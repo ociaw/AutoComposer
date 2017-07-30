@@ -74,48 +74,5 @@ namespace AutoComposer
             _typePropertyMaps.TryAdd(type, properties);
             return properties;
         }
-
-        private Object Compose(Type t, Object[] objects)
-        {
-            Object composee = objects[0];
-
-            Object[] toBeMapped = new Object[objects.Length - 1];
-            Array.Copy(objects, 1, toBeMapped, 0, toBeMapped.Length);
-
-
-            if (!_typePropertyMaps.ContainsKey(t))
-                PopulateMap(t, toBeMapped);
-
-            PropertyInfo[] properties = _typePropertyMaps[t];
-            if (toBeMapped.Length != properties.Length)
-                throw new ArgumentException("Incorrect number of objects.");
-
-            for (Int32 i = 0; i < properties.Length; i++)
-            {
-                PropertyInfo property = properties[i];
-                property.SetValue(composee, toBeMapped[i]);
-            }
-            return composee;
-        }
-
-        private void PopulateMap(Type t, Object[] objects)
-        {
-            var assignableProperties = t.GetRuntimeProperties()
-                .Where(p => p.GetCustomAttribute<ComposableAttribute>() != null)
-                .OrderBy(p => p.GetCustomAttribute<AssignOrderAttribute>().Order);
-            List<PropertyInfo> unassignedProperties = assignableProperties.ToList();
-            List<PropertyInfo> properties = new List<PropertyInfo>(unassignedProperties.Count);
-            foreach (var obj in objects)
-            {
-                Type type = obj.GetType();
-                PropertyInfo matched = unassignedProperties.FirstOrDefault(p => p.PropertyType == type);
-                if (matched == null)
-                    throw new ArgumentException("Object type not found.", nameof(objects));
-
-                unassignedProperties.Remove(matched);
-                properties.Add(matched);
-            }
-            _typePropertyMaps.TryAdd(t, properties.ToArray());
-        }
     }
 }
