@@ -9,6 +9,9 @@
     <Company>ociaw.com</Company>
     <PackageReleaseNotes>We now require ordering for multiple composable properties
 Added a flatteng method to get all composables in a type</PackageReleaseNotes>
+    <PackageProjectUrl>https://bitbucket.org/ociaw/autocomposer</PackageProjectUrl>
+    <RepositoryUrl>https://bitbucket.org/ociaw/autocomposer</RepositoryUrl>
+    <Copyright>2017</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
