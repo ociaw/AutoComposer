@@ -16,10 +16,11 @@ namespace AutoComposer
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
 
-            var enumerator = ((IEnumerable<Object>) objects).GetEnumerator();
-            T ret = (T) ComposeInternal(enumerator);
-            enumerator.Dispose();
-            return ret;
+            using (var enumerator = ((IEnumerable<Object>)objects).GetEnumerator())
+            {
+                T ret = (T)ComposeInternal(enumerator);
+                return ret;
+            }
         }
 
         public T Compose<T>(IEnumerator<Object> objects) where T : class
