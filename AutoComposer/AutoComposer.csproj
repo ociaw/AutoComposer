@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>Full</DebugType>
     <Version>2.0.0</Version>
     <Description>Automatically composes multiple objects into a single object</Description>
     <Authors>Michael Johnson</Authors>
