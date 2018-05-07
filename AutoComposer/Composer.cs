@@ -11,7 +11,7 @@ namespace AutoComposer
         private readonly ConcurrentDictionary<Type, PropertyInfo[]> _typePropertyMaps = new ConcurrentDictionary<Type, PropertyInfo[]>();
         private readonly ConcurrentDictionary<Type, Type[]> _typeTypeMaps = new ConcurrentDictionary<Type, Type[]>();
 
-        public T Compose<T> (Object[] objects) where T : class
+        public T Compose<T> (Object[] objects)
         {
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
@@ -23,7 +23,7 @@ namespace AutoComposer
             }
         }
 
-        public T Compose<T>(IEnumerator<Object> objects) where T : class
+        public T Compose<T>(IEnumerator<Object> objects)
         {
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
@@ -31,10 +31,8 @@ namespace AutoComposer
             return (T) ComposeInternal(objects);
         }
 
-        public Object Compose(Type type, IEnumerator<Object> objects)
+        public Object Compose(IEnumerator<Object> objects)
         {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
             if (objects == null)
                 throw new ArgumentNullException(nameof(objects));
 
