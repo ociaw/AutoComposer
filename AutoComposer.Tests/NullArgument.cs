@@ -4,6 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AutoComposer.Tests
 {
+    /// <summary>
+    /// These cases test the behavior when null input is provided to the methods where a null is not permitted.
+    /// In all cases, the system should throw an ArgumentNullException in response to the invalid input.
+    /// </summary>
     [TestClass]
     public class NullArgument
     {

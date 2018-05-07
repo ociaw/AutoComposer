@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AutoComposer.Tests
 {
+    /// <summary>
+    /// These test cases test the order property to ensure that the objects are composed in the correct order.
+    /// </summary>
     [TestClass]
     public class OrderedComposition
     {

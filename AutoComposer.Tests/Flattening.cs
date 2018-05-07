@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AutoComposer.Tests
 {
+    /// <summary>
+    /// These cases test the flattening feature of the library. 
+    /// They should each return an array consisting of the top level class and each of its composable children.
+    /// </summary>
     [TestClass]
     public class Flattening
     {

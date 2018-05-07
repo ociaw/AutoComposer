@@ -11,6 +11,13 @@ namespace AutoComposer
         private readonly ConcurrentDictionary<Type, PropertyInfo[]> _typePropertyMaps = new ConcurrentDictionary<Type, PropertyInfo[]>();
         private readonly ConcurrentDictionary<Type, Type[]> _typeTypeMaps = new ConcurrentDictionary<Type, Type[]>();
 
+        /// <summary>
+        /// Composes a single <typeparamref name="T"/> object from the objects within the provided array.
+        /// </summary>
+        /// <typeparam name="T">The type of object to compose.</typeparam>
+        /// <param name="objects">An array of objects containing the objects the composed object depends upon.
+        /// The type of the first element must match <typeparamref name="T"/>.</param>
+        /// <returns>A fully composed object or null if the first element is null.</returns>
         public T Compose<T> (Object[] objects)
         {
             if (objects == null)
@@ -23,6 +30,13 @@ namespace AutoComposer
             }
         }
 
+        /// <summary>
+        /// Composes a single <typeparamref name="T"/> object from the objects provided by the enumerator.
+        /// </summary>
+        /// <typeparam name="T">The type of object to compose.</typeparam>
+        /// <param name="objects">An enumerator of objects containing the objects the composed object depends upon.
+        /// The type of the first element must match <typeparamref name="T"/>.</param>
+        /// <returns>A fully composed object or null if the first element is null.</returns>
         public T Compose<T>(IEnumerator<Object> objects)
         {
             if (objects == null)
@@ -31,6 +45,11 @@ namespace AutoComposer
             return (T) ComposeInternal(objects);
         }
 
+        /// <summary>
+        /// Composes a single object from the objects provided by the enumerator.
+        /// </summary>
+        /// <param name="objects">An enumerator of objects containing the objects the composed object depends upon.</param>
+        /// <returns>A fully composed object with the same type as the first element of the enumerator.</returns>
         public Object Compose(IEnumerator<Object> objects)
         {
             if (objects == null)
@@ -75,11 +94,21 @@ namespace AutoComposer
             return properties;
         }
 
+        /// <summary>
+        /// Recursively flattens a type into an array of it's composable dependencies.
+        /// </summary>
+        /// <typeparam name="T">The type to flatten.</typeparam>
+        /// <returns>An array of all the composable children of the type.</returns>
         public Type[] FlattenComposableType<T>()
         {
             return FlattenComposableTypeInternal(typeof(T)).ToArray();
         }
 
+        /// <summary>
+        /// Recursively flattens a type into an array of it's composable dependencies.
+        /// </summary>
+        /// <param name="type">The type to flatten.</param>
+        /// <returns>An array of all the composable children of the type.</returns>
         public Type[] FlattenComposableType(Type type)
         {
             if (type == null)
