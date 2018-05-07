@@ -29,5 +29,12 @@ namespace AutoComposer.Tests
             Object[] array = null;
             Assert.ThrowsException<ArgumentNullException>(delegate { composer.Compose<Object>(array); });
         }
+
+        [TestMethod]
+        public void Flatten()
+        {
+            Composer composer = new Composer();
+            Assert.ThrowsException<ArgumentNullException>(delegate { composer.FlattenComposableType(null); });
+        }
     }
 }

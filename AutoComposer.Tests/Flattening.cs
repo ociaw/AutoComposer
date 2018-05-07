@@ -7,10 +7,24 @@ namespace AutoComposer.Tests
     public class Flattening
     {
         [TestMethod]
-        public void Flatten()
+        public void FlattenGeneric()
         {
             Composer composer = new Composer();
             Type[] types = composer.FlattenComposableType<Top>();
+            Assert.AreEqual(types[0], typeof(Top));
+            Assert.AreEqual(types[1], typeof(Middle));
+            Assert.AreEqual(types[2], typeof(Bottom));
+            Assert.AreEqual(types[3], typeof(Bottom));
+            Assert.AreEqual(types[4], typeof(Middle));
+            Assert.AreEqual(types[5], typeof(Bottom));
+            Assert.AreEqual(types[6], typeof(Bottom));
+        }
+
+        [TestMethod]
+        public void Flatten()
+        {
+            Composer composer = new Composer();
+            Type[] types = composer.FlattenComposableType(typeof(Top));
             Assert.AreEqual(types[0], typeof(Top));
             Assert.AreEqual(types[1], typeof(Middle));
             Assert.AreEqual(types[2], typeof(Bottom));
