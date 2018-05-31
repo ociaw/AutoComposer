@@ -4,15 +4,15 @@
     <TargetFramework>netstandard1.4</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>Full</DebugType>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Description>Automatically composes multiple objects into a single object</Description>
     <Authors>Michael Johnson</Authors>
     <Company>ociaw.com</Company>
-    <PackageReleaseNotes>We now require ordering for multiple composable properties
-Added a flatteng method to get all composables in a type</PackageReleaseNotes>
+    <PackageReleaseNotes>Added unit tests
+Allow structs as well as classes</PackageReleaseNotes>
     <PackageProjectUrl>https://bitbucket.org/ociaw/autocomposer</PackageProjectUrl>
     <RepositoryUrl>https://bitbucket.org/ociaw/autocomposer</RepositoryUrl>
-    <Copyright>2017</Copyright>
+    <Copyright>2018</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
