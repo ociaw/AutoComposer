@@ -5,9 +5,9 @@ namespace Benchmarking
 {
     public class Program
     {
-        public static void Main(String[] args)
+        public static void Main()
         {
-            var summary = BenchmarkRunner.Run<OrderedComposition>();
+            _ = BenchmarkRunner.Run<OrderedComposition>();
         }
     }
 }
