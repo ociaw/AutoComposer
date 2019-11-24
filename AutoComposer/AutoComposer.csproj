@@ -6,13 +6,14 @@
     <DebugType>Full</DebugType>
     <Version>3.0.0</Version>
     <Description>Automatically composes multiple objects into a single object</Description>
-    <Authors>Michael Johnson</Authors>
+    <Authors>ociaw</Authors>
     <Company>ociaw.com</Company>
     <PackageReleaseNotes>Added unit tests
 Allow structs as well as classes</PackageReleaseNotes>
-    <PackageProjectUrl>https://bitbucket.org/ociaw/autocomposer</PackageProjectUrl>
-    <RepositoryUrl>https://bitbucket.org/ociaw/autocomposer</RepositoryUrl>
-    <Copyright>2018</Copyright>
+    <PackageProjectUrl>https://github.com/ociaw/autocomposer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ociaw/autocomposer</RepositoryUrl>
+    <Copyright>2019</Copyright>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
